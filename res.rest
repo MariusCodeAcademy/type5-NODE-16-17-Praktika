@@ -2,6 +2,10 @@ GET http://localhost:3000/cars
 
 ###
 
+GET http://localhost:3000/cars?carId=1&Say=hi
+
+###
+
 POST http://localhost:3000/cars
 Content-Type: application/json
 

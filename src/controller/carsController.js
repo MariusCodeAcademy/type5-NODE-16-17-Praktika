@@ -1,6 +1,7 @@
 const { getCarsFromDb, insertCarDb } = require('../model/carsModel');
 
 async function carsIndex(req, res) {
+  console.log('req.query ===', req.query);
   const allCars = await getCarsFromDb();
   if (allCars === false) {
     res.status(500);
