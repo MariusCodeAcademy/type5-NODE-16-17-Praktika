@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const morgan = require('morgan');
 const cors = require('cors');
+const carsRoutes = require('./routes/carsRoutes');
 
 // const mysql = require('mysql2/promise');
 // const dbConfig = require('./dbConfig');
@@ -15,8 +16,7 @@ app.use(morgan('dev'));
 app.use(cors());
 app.use(express.json());
 
-app.get('/', (req, res) => {
-  res.send('Hello express');
-});
+// routes
+app.use('/', carsRoutes);
 
 app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));

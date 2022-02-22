@@ -1,3 +1,5 @@
+const { getCarsFromDb } = require('../model/carsModel');
+
 async function carsIndex(req, res) {
   const allCars = await getCarsFromDb();
   if (allCars === false) {
@@ -6,3 +8,7 @@ async function carsIndex(req, res) {
   }
   res.json(allCars);
 }
+
+module.exports = {
+  carsIndex,
+};
