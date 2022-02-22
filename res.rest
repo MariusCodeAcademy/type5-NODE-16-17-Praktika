@@ -1,3 +1,13 @@
 GET http://localhost:3000/cars
 
 ###
+
+POST http://localhost:3000/cars
+Content-Type: application/json
+
+{
+  "title": "MB",
+  "image": "https://picsum.photos/id/1003/1181/1772",
+  "price": 6000,
+  "number_plates": "MBB144"
+}

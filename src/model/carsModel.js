@@ -13,6 +13,11 @@ async function getCarsFromDb() {
   }
 }
 
+async function insertCarDb() {
+  // db stuff
+}
+
 module.exports = {
   getCarsFromDb,
+  insertCarDb,
 };
