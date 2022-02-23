@@ -18,8 +18,8 @@ POST http://localhost:3000/cars
 Content-Type: application/json
 
 {
-  "title": "MB",
+  "title": "asdasd",
   "image": "https://picsum.photos/id/1003/1181/1772",
-  "price": 6000,
-  "number_plates": "MBB144"
+  "price": 1000,
+  "number_plates": "sdsd"
 }

@@ -17,11 +17,11 @@ async function carsIndex(req, res) {
 
 async function createCar(req, res) {
   const newCarData = req.body;
-
+  console.log('newCarData ===', newCarData);
   // validacija
-  const { title, image, price, number_plates } = newCarData;
+  // const { title, image, price, number_plates } = newCarData;
   // TODO: Pagalvoti apie geresni buda patikrtinti reiksmes
-  if (!title || !image || !price || !number_plates) {
+  if (checkBody(newCarData)) {
     res.status(400).json({ error: 'Uzpildykite visus laukus' });
     return;
   }
@@ -65,3 +65,16 @@ module.exports = {
   singleCar,
   deleteCar,
 };
+
+function checkBody(dataToCheck) {
+  const mustBeKeys = ['title', 'image', 'price', 'number_plates'];
+  const values = Object.values(dataToCheck);
+  const valuesBool = values.map((val) => !!val).filter((val) => val === false);
+  const ourKeys = Object.keys(dataToCheck);
+  const allKeys = mustBeKeys.filter((mustKey) => !ourKeys.includes(mustKey));
+  if (valuesBool.length > 0 || allKeys.length > 0) {
+    console.log('ne visi duomenys paduoti');
+    return true;
+  }
+  return false;
+}

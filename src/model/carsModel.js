@@ -15,7 +15,9 @@ async function getCarsFromDb() {
 
 async function insertCarDb(newCarData) {
   try {
-    const { title, image, price, number_plates } = newCarData;
+    const {
+      title, image, price, number_plates,
+    } = newCarData;
     const conn = await mysql.createConnection(dbConfig);
     const safeTitle = mysql.escape(title);
     const sql = `
