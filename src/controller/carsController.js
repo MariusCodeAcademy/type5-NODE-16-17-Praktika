@@ -1,4 +1,8 @@
-const { getCarsFromDb, insertCarDb } = require('../model/carsModel');
+const {
+  getCarsFromDb,
+  insertCarDb,
+  getSingleCarDb,
+} = require('../model/carsModel');
 
 async function carsIndex(req, res) {
   console.log('req.query ===', req.query);

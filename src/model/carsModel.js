@@ -36,7 +36,21 @@ async function insertCarDb(newCarData) {
   }
 }
 
+async function getSingleCarDb(id) {
+  try {
+    const conn = await mysql.createConnection(dbConfig);
+    const sql = 'SELECT * FROM cars WHERE id = ?';
+    const [foundCar] = await conn.execute(sql, [id]);
+    await conn.close();
+    return foundCar;
+  } catch (error) {
+    console.log('getSingleCarDb ===', error);
+    return false;
+  }
+}
+
 module.exports = {
   getCarsFromDb,
   insertCarDb,
+  getSingleCarDb,
 };
