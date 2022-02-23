@@ -1,3 +1,5 @@
+const mysql = require('mysql2/promise');
+const dbConfig = require('../dbConfig');
 const {
   getCarsFromDb,
   insertCarDb,
@@ -59,11 +61,24 @@ async function deleteCar(req, res) {
   res.json('Delete success');
 }
 
+async function testDb(req, res) {
+  try {
+    const conn = await mysql.createConnection(dbConfig);
+    res.json({
+      success: 'connected to db',
+    });
+    await conn.close();
+  } catch (error) {
+    res.status(500).json({ error: 'failed to connect to db' });
+  }
+}
+
 module.exports = {
   carsIndex,
   createCar,
   singleCar,
   deleteCar,
+  testDb,
 };
 
 function checkBody(dataToCheck) {

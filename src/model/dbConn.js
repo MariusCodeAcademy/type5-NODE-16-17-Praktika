@@ -7,6 +7,7 @@ async function checkConnection() {
     console.log('Connected to DB');
     await conn.close();
   } catch (error) {
+    console.log('Error connecting to db');
     console.log('checkConnection ===', error);
   }
 }
