@@ -15,9 +15,7 @@ async function getCarsFromDb() {
 
 async function insertCarDb(newCarData) {
   try {
-    const {
-      title, image, price, number_plates,
-    } = newCarData;
+    const { title, image, price, number_plates } = newCarData;
     const conn = await mysql.createConnection(dbConfig);
     const safeTitle = mysql.escape(title);
     const sql = `
@@ -50,9 +48,22 @@ async function getSingleCarDb(id) {
     return false;
   }
 }
+async function removeCarDb(id) {
+  try {
+    const conn = await mysql.createConnection(dbConfig);
+    const sql = 'DELETE FROM cars WHERE id = ? LIMIT 1';
+    const [deleteResult] = await conn.execute(sql, [id]);
+    await conn.close();
+    return deleteResult;
+  } catch (error) {
+    console.log('removeCarDb ===', error);
+    return false;
+  }
+}
 
 module.exports = {
   getCarsFromDb,
   insertCarDb,
   getSingleCarDb,
+  removeCarDb,
 };

@@ -2,6 +2,7 @@ const {
   getCarsFromDb,
   insertCarDb,
   getSingleCarDb,
+  removeCarDb,
 } = require('../model/carsModel');
 
 async function carsIndex(req, res) {
@@ -18,9 +19,7 @@ async function createCar(req, res) {
   const newCarData = req.body;
 
   // validacija
-  const {
-    title, image, price, number_plates,
-  } = newCarData;
+  const { title, image, price, number_plates } = newCarData;
   // TODO: Pagalvoti apie geresni buda patikrtinti reiksmes
   if (!title || !image || !price || !number_plates) {
     res.status(400).json({ error: 'Uzpildykite visus laukus' });
@@ -46,8 +45,23 @@ async function singleCar(req, res) {
   res.json(foundSingleCar);
 }
 
+async function deleteCar(req, res) {
+  const { id } = req.params;
+  const deleteResult = await removeCarDb(id);
+  if (deleteResult === false) {
+    res.status(500);
+    return;
+  }
+  if (deleteResult.affectedRows !== 1) {
+    res.json('no rows deleted');
+    return;
+  }
+  res.json('Delete success');
+}
+
 module.exports = {
   carsIndex,
   createCar,
   singleCar,
+  deleteCar,
 };
