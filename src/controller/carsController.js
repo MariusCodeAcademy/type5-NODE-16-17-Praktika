@@ -30,7 +30,18 @@ async function createCar(req, res) {
   res.json(carAddingResult);
 }
 
+async function singleCar(req, res) {
+  const { id } = req.params;
+  const foundSingleCar = await getSingleCarDb(id);
+  if (foundSingleCar === false) {
+    res.status(500);
+    return;
+  }
+  res.json(foundSingleCar);
+}
+
 module.exports = {
   carsIndex,
   createCar,
+  singleCar,
 };
